@@ -17,7 +17,7 @@ const createRedisClient = () => {
         const timer = setTimeout(() => {
             console.error("redis client connection timeout");
             resolve(null)
-        }, 2000);
+        }, 500);
         client.on("ready", () => {
             clearTimeout(timer);
             console.log('Connected to Redis server');
