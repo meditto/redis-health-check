@@ -16,7 +16,6 @@ const createRedisClient = () => {
         client.pingAsync = promisify(client.ping).bind(client);
         const timer = setTimeout(() => {
             console.error("redis client connection timeout");
-            console.log(client);
             resolve(null)
         }, 2000);
         client.on("ready", () => {
@@ -39,7 +38,6 @@ app.get('/redis-health-check', async (req, res) => {
         res.status(500).send('Redis Unavailable');
         return;
     }
-    console.log('redisClient', redisClient);
     try {
         const result = await redisClient.pingAsync();
         res.status(200).send('Redis OK');
